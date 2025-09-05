@@ -211,14 +211,16 @@ public with sharing class DMLOperations {
 	 */
 	public static void upsertAccountsWithContacts(List<Contact> contactsToUpsert) {
 		// Loop through each Contact
-
+        for ( Contact c : contactsToUpsert ) {
 		// Extract the Account Name from Contact's LastName
 
 		// Get the account based on the name or create one if it doesn't exist
 
 		// Link the Contact to its Account using the Account Id
 
+        }
 		// Upsert the Contacts
+        upsert contactsToUpsert;
 	}
 
     /**
