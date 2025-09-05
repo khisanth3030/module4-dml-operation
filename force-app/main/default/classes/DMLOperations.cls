@@ -107,11 +107,13 @@ public with sharing class DMLOperations {
      */
     public static void updateOpportunityStage(Id oppId, String newStage) {
         // Retrieve the Opportunity from the database
-        // [SELECT Id FROM Opportunity WHERE Id = :oppId]
+        Opportunity updatedOpp = [SELECT Id FROM Opportunity WHERE Id = :oppId];
 
         // Update the Opportunity's stage
+        updatedOpp.StageName = newStage;
 
         // Update the Opportunity in the database
+        update updatedOpp;
     }
 
     /**
