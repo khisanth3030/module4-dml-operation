@@ -75,7 +75,7 @@ public with sharing class DMLOperations {
 
         // Insert the Contact into the database
         insert myContact;
-        
+
         // Return the Id of the newly created Contact
         return myContact.Id;
     }
@@ -89,11 +89,13 @@ public with sharing class DMLOperations {
      */
     public static void updateContactLastName(Id contactId, String newLastName) {
         // Retrieve the Contact from the database
-        // [SELECT Id FROM Contact WHERE Id = :contactId]
+        Contact updatedContact = [SELECT Id FROM Contact WHERE Id = :contactId];
 
         // Update the Contact's last name
+        updatedContact.LastName = newLastName;
 
         // Update the Contact in the database
+        update updatedContact;
     }
 
     /**
