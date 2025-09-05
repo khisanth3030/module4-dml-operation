@@ -172,8 +172,12 @@ public with sharing class DMLOperations {
      */
     public static void upsertOpportunities(String accountName, List<String> oppNames) {
         // Loop through each Opportunity name
+        for ( String oppName : oppNames ){
+            
             // Create an Opportunity with the given name
             // Add the Opportunity to the list
+
+        }
     }
     
     /**
