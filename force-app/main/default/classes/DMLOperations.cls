@@ -230,7 +230,7 @@ public with sharing class DMLOperations {
      */
     public static void insertAndDeleteLeads(List<String> leadNames) {
         // Loop through each Lead name
-
+        for(String leadName : leadNames){}
         // Insert the Leads
 
         // Delete the Leads
