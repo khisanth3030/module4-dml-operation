@@ -179,7 +179,7 @@ public with sharing class DMLOperations {
         for ( String oppStringName : oppNames ){
 
             // Create an Opportunity with the given name
-            Opportunity opp = new Opportunity( );
+            Opportunity opp = [SELECT Id, Name FROM Opportunity WHERE Name = :oppStringName];
             // Add the Opportunity to the list
 
         }
