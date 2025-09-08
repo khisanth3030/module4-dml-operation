@@ -171,10 +171,15 @@ public with sharing class DMLOperations {
      * @param oppNames The list of Opportunity names.
      */
     public static void upsertOpportunities(String accountName, List<String> oppNames) {
+        // If there is an account with the given name, else create a new account
+        Account acct = [SELECT Id, Name FROM Account WHERE Name = :accountName];
+        if ( acct == null) { acct = new Account( Name = accountName ); }
+
         // Loop through each Opportunity name
-        for ( String oppName : oppNames ){
+        for ( String oppStringName : oppNames ){
 
             // Create an Opportunity with the given name
+            Opportunity opp = new Opportunity( );
             // Add the Opportunity to the list
 
         }
