@@ -183,7 +183,7 @@ public with sharing class DMLOperations {
             // Create an Opportunity with the given name
             Opportunity opp = new Opportunity( Name = oppStringName);
             opp.AccountId = acct.Id; 
-                               
+
             // Set the Opportunity's Stage to Qualification
             opp.StageName = 'Qualification';
 
@@ -209,14 +209,23 @@ public with sharing class DMLOperations {
 	 */
 	public static Account upsertAccount(String accountName) {
 		// Query for the Account
-		List<Account> accounts = [SELECT Id FROM Account WHERE Name = :accountName];
+		List<Account> accounts = [SELECT Id, Name, Description FROM Account 
+                        WHERE Name = :accountName];
+        Account acct = new Account();
 
 		// if the Account exists, update the description
-        if ( accounts !=null ) {}
+        if ( !accounts.isEmpty() ) {
+            acct = accounts[0];
+            acct.description = 'Updated Account';
+        }
+
 		// otherwise, create a new Account and set the description
-        else{}
-		// Upsert the Account
-		return null;
+        else if (accounts.size()==0)   {
+            acct = new Account( Name = accountName );
+            acct.description = 'New Account';
+        }
+        upsert acct;
+        return acct;
 	}
 
     /**
