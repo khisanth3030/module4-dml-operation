@@ -172,17 +172,31 @@ public with sharing class DMLOperations {
      */
     public static void upsertOpportunities(String accountName, List<String> oppNames) {
         // If there is an account with the given name, else create a new account
-        Account acct = [SELECT Id, Name FROM Account WHERE Name = :accountName];
-        if ( acct == null) { acct = new Account( Name = accountName ); }
+        Account acct = new Account( Name = accountName ); 
+        upsert acct; 
+
+        List<Opportunity> oppsToUpsert = new List<Opportunity>();
 
         // Loop through each Opportunity name
         for ( String oppStringName : oppNames ){
 
             // Create an Opportunity with the given name
-            Opportunity opp = [SELECT Id, Name FROM Opportunity WHERE Name = :oppStringName];
-            // Add the Opportunity to the list
+            Opportunity opp = new Opportunity( Name = oppStringName);
+            opp.AccountId = acct.Id; 
+                               
+            // Set the Opportunity's Stage to Qualification
+            opp.StageName = 'Qualification';
 
+            // Set the Opportunity's Close Date to 3 months from today
+            opp.CloseDate = Date.today().addMonths(3);
+
+            // Set the Opportunity's Amount to 50000
+            opp.Amount = 50000;
+
+            // Add the Opportunity to the list
+            oppsToUpsert.add(opp);
         }
+        upsert oppsToUpsert;
     }
     
     /**
