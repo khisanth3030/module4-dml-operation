@@ -279,7 +279,13 @@ public with sharing class DMLOperations {
     public static void createAndDeleteCases(String accountId, Integer numOfCases) {
 
         List <Case> cases = new List<Case>();
-
+        for (Integer i=0; i<numOfCases; i++){
+            Case myCase = new Case();
+            myCase.AccountId = accountId;
+            myCase.Status = 'New';
+            myCase.Subject = 'Test Case ' + i;
+            cases.add(myCase);
+        }
 
         // Insert the cases
         insert cases;
