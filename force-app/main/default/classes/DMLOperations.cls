@@ -260,10 +260,13 @@ public with sharing class DMLOperations {
      */
     public static void insertAndDeleteLeads(List<String> leadNames) {
         // Loop through each Lead name
-        for(String leadName : leadNames){}
-        // Insert the Leads
-
-        // Delete the Leads
+        for(String leadName : leadNames){
+            Lead myLead = new Lead(LastName = leadName, Company = leadName);
+            // Insert the Leads
+            insert myLead;
+            // Delete the Leads
+            delete myLead;
+        }
     }
 
 
